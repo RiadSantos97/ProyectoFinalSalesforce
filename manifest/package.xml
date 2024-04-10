@@ -1,36 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>*</members>
-        <name>ApexClass</name>
+        <members>Cargar_Materias</members>
+        <members>Inscripcion_Extracurriculares</members>
+        <name>FlowDefinition</name>
+    </types>
+    <types>
+        <members>Cargar_Materias</members>
+        <members>Inscripcion_Extracurriculares</members>
+        <name>Flow</name>
+    </types>
+    <types>
+        <members>Extracurricular__c</members>
+        <members>Grupo_Estudiantes__c</members>
+        <members>Inscripcion__c</members>
+        <members>Lista_Espera__c</members>
+        <members>Materia__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>*</members> 
+        <name>ListView</name>
     </types>
     <types>
         <members>*</members>
-        <name>ApexComponent</name>
+        <name>RecordType</name>
     </types>
     <types>
         <members>*</members>
-        <name>ApexPage</name>
+        <name>CustomField</name>
     </types>
     <types>
         <members>*</members>
-        <name>ApexTestSuite</name>
+        <name>Layout</name>
     </types>
     <types>
         <members>*</members>
-        <name>ApexTrigger</name>
+        <name>ValidationRule</name>
     </types>
     <types>
         <members>*</members>
-        <name>AuraDefinitionBundle</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>LightningComponentBundle</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>StaticResource</name>
+        <name>Profile</name>
     </types>
     <version>59.0</version>
 </Package>

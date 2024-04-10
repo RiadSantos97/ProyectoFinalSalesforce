@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <assignments>
+        <name>Asignar_repetidos</name>
+        <label>Asignar repetidos</label>
+        <locationX>666</locationX>
+        <locationY>1406</locationY>
+        <assignmentItems>
+            <assignToReference>DuplicadosEliminar</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Extracurriculares_filtradas_por_fecha_y_hora</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Inscripciones_Actuales_Estudiante</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Asignación de las actividades/eventos extracurriculares seleccionados por el estudiante</description>
+        <name>Assign_Extracurriculares_Seleccionadas</name>
+        <label>Assign Extracurriculares Seleccionadas</label>
+        <locationX>182</locationX>
+        <locationY>2066</locationY>
+        <assignmentItems>
+            <assignToReference>ExtracurricularesSeleccionadasVar</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>ExtracurricularesFiltradasPorHora.selectedRows</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Reiniciar_Contador</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Se asigna a la variable las actividades/eventos extracurriculares totales</description>
+        <name>Assign_Extracurriculares_Totales</name>
+        <label>Assign Extracurriculares Totales</label>
+        <locationX>182</locationX>
+        <locationY>758</locationY>
+        <assignmentItems>
+            <assignToReference>ExtracurricularesTotalesVar</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Extracurriculares</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Filtrar_por_fecha_hora_extracurriculares</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Asignación a la variable InscripcionNueva de la nueva inscripcion del estudiante</description>
+        <name>Assign_Inscripcion_Nueva</name>
+        <label>Assign Inscripcion Nueva</label>
+        <locationX>138</locationX>
+        <locationY>2798</locationY>
+        <assignmentItems>
+            <assignToReference>InscripcionNueva.Estudiante__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>InscripcionNueva.Extracurricular__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_Creacion_Inscripciones.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Creacion_Inscripcion_Nueva</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Asignacion de las inscripciones iniciales del estudiante a la variable que las contendrá</description>
+        <name>Assign_inscripciones_iniciales</name>
+        <label>Assign inscripciones iniciales</label>
+        <locationX>182</locationX>
+        <locationY>542</locationY>
+        <assignmentItems>
+            <assignToReference>InscripcionesEstudianteInicialVar</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Inscripciones_Estudiante</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Extracurriculares</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Asignación de todas las actividades/eventos extracurriculares a mostrar en caso de que el estudiante no cuente con ninguna inscripción actual</description>
+        <name>Assign_Todas_Extracurriculares_Mostrar</name>
+        <label>Assign Todas Extracurriculares Mostrar</label>
+        <locationX>314</locationX>
+        <locationY>1082</locationY>
+        <assignmentItems>
+            <assignToReference>ExtracurricularesAMostrarVar</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Filtrar_por_fecha_hora_extracurriculares</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Inscribete_a_las_actividades_eventos_Extracurriculares</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Aumento del contador de las actividades extracurriculares seleccionadas</description>
+        <name>Aumentar_Contador_Extracurriculares_Seleccionadas</name>
+        <label>Aumentar Contador Extracurriculares Seleccionadas</label>
+        <locationX>270</locationX>
+        <locationY>2390</locationY>
+        <assignmentItems>
+            <assignToReference>Contador</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Extracurriculares_Seleccionadas</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Aumento del contador de inscripciones con las que cuenta el estudiante al inicio del flujo</description>
+        <name>Aumento_Contador_Inscripciones</name>
+        <label>Aumento Contador Inscripciones</label>
+        <locationX>270</locationX>
+        <locationY>350</locationY>
+        <assignmentItems>
+            <assignToReference>Contador</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Conteo_Inscripciones_Iniciales</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Inscripciones_finales</name>
+        <label>Inscripciones finales</label>
+        <locationX>50</locationX>
+        <locationY>1766</locationY>
+        <assignmentItems>
+            <assignToReference>Filtrar_por_fecha_hora_extracurriculares</assignToReference>
+            <operator>RemoveAll</operator>
+            <value>
+                <elementReference>DuplicadosEliminar</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ExtracurricularesAMostrarVar</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Filtrar_por_fecha_hora_extracurriculares</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Inscribete_a_las_actividades_eventos_Extracurriculares</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Reinicio del contador para ver que se hayan seleccionado inscripciones por el estudiante</description>
+        <name>Reiniciar_Contador</name>
+        <label>Reiniciar Contador</label>
+        <locationX>182</locationX>
+        <locationY>2174</locationY>
+        <assignmentItems>
+            <assignToReference>Contador</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Extracurriculares_Seleccionadas</targetReference>
+        </connector>
+    </assignments>
+    <collectionProcessors>
+        <description>Se realiza un filtrado de las actividades extracurriculares dependiendo de la fecha y hora en la que el usuario lo está visualizando, esto para que no pueda ver extracurriculares para las que falte menos de un día ya que no podrá inscribirse</description>
+        <name>Filtrar_por_fecha_hora_extracurriculares</name>
+        <elementSubtype>FilterCollectionProcessor</elementSubtype>
+        <label>Filtrar por fecha hora extracurriculares</label>
+        <locationX>182</locationX>
+        <locationY>866</locationY>
+        <assignNextValueToReference>currentItem_Filtrar_por_fecha_hora_extracurriculares</assignNextValueToReference>
+        <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
+        <collectionReference>ExtracurricularesTotalesVar</collectionReference>
+        <conditionLogic>or</conditionLogic>
+        <conditions>
+            <leftValueReference>currentItem_Filtrar_por_fecha_hora_extracurriculares.Fecha_y_hora__c</leftValueReference>
+            <operator>GreaterThan</operator>
+            <rightValue>
+                <elementReference>FechaHoraAyerVar</elementReference>
+            </rightValue>
+        </conditions>
+        <connector>
+            <targetReference>Estudiante_tiene_inscripciones</targetReference>
+        </connector>
+    </collectionProcessors>
+    <decisions>
+        <description>Ver si el usuario ya tiene la actividad/evento extracurricular asociado o si aun no</description>
+        <name>El_Estudiante_Esta_Inscrito</name>
+        <label>El Estudiante Esta Inscrito</label>
+        <locationX>578</locationX>
+        <locationY>1298</locationY>
+        <defaultConnector>
+            <targetReference>Asignar_repetidos</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>NO_esta_inscrito</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Loop_Extracurriculares_filtradas_por_fecha_y_hora.Id</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>Loop_Inscripciones_Actuales_Estudiante.Extracurricular__r.Id</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Inscripciones_Actuales_Estudiante</targetReference>
+            </connector>
+            <label>NO esta inscrito</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Estudiante_selecciono_extracurriculares</name>
+        <label>Estudiante selecciono extracurriculares</label>
+        <locationX>182</locationX>
+        <locationY>2582</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>SI_selecciono</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Contador</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Creacion_Inscripciones</targetReference>
+            </connector>
+            <label>SI selecciono</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Validar si el estudiante ya tiene inscripciones, en caso de no contar con inscripciones se muestran todas las actividades/eventos extracurriculares y en caso de ya contar con inscripciones se filtran las actividades/eventos disponibles para que no pueda visualizar en las que ya se encuentre inscrito</description>
+        <name>Estudiante_tiene_inscripciones</name>
+        <label>Estudiante tiene inscripciones</label>
+        <locationX>182</locationX>
+        <locationY>974</locationY>
+        <defaultConnector>
+            <targetReference>Assign_Todas_Extracurriculares_Mostrar</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>TIENE_inscripciones_previas</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Contador</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Extracurriculares_filtradas_por_fecha_y_hora</targetReference>
+            </connector>
+            <label>TIENE inscripciones previas</label>
+        </rules>
+    </decisions>
+    <description>Flow para la inscripción de los estudiantes a las actividades/eventos extracurriculares</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Fecha y hora exacta del día de ayer, con el objetivo de utilizarla para filtrar los datos</description>
+        <name>FechaHoraAyerVar</name>
+        <dataType>DateTime</dataType>
+        <expression>DATETIMEVALUE(NOW()) + (1)</expression>
+    </formulas>
+    <interviewLabel>Inscripcion Extracurriculares {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Inscripcion Extracurriculares</label>
+    <loops>
+        <description>Aumento del contador de las inscripciones iniciales del estudiante</description>
+        <name>Conteo_Inscripciones_Iniciales</name>
+        <label>Conteo Inscripciones Iniciales</label>
+        <locationX>182</locationX>
+        <locationY>242</locationY>
+        <collectionReference>Get_Inscripciones_Estudiante</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Aumento_Contador_Inscripciones</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Assign_inscripciones_iniciales</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <description>Loop para crear la inscripción de los estudiantes a las actividades/eventos extracurriculares</description>
+        <name>Loop_Creacion_Inscripciones</name>
+        <label>Loop Creacion Inscripciones</label>
+        <locationX>50</locationX>
+        <locationY>2690</locationY>
+        <collectionReference>ExtracurricularesSeleccionadasVar</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assign_Inscripcion_Nueva</targetReference>
+        </nextValueConnector>
+    </loops>
+    <loops>
+        <description>Loop a través de las actividades/eventos extracurriculares actualmente filtrados por fecha y por hora</description>
+        <name>Loop_Extracurriculares_filtradas_por_fecha_y_hora</name>
+        <label>Loop Extracurriculares filtradas por fecha y hora</label>
+        <locationX>50</locationX>
+        <locationY>1082</locationY>
+        <collectionReference>Filtrar_por_fecha_hora_extracurriculares</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Loop_Inscripciones_Actuales_Estudiante</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Inscripciones_finales</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <description>Loop a través de las actividades/eventos extracurriculares seleccionados</description>
+        <name>Loop_Extracurriculares_Seleccionadas</name>
+        <label>Loop Extracurriculares Seleccionadas</label>
+        <locationX>182</locationX>
+        <locationY>2282</locationY>
+        <collectionReference>ExtracurricularesSeleccionadasVar</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Aumentar_Contador_Extracurriculares_Seleccionadas</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Estudiante_selecciono_extracurriculares</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <description>Loop a través de las inscripciones actuales (al inicio del flujo) del estudiante</description>
+        <name>Loop_Inscripciones_Actuales_Estudiante</name>
+        <label>Loop Inscripciones Actuales Estudiante</label>
+        <locationX>402</locationX>
+        <locationY>1190</locationY>
+        <collectionReference>InscripcionesEstudianteInicialVar</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>El_Estudiante_Esta_Inscrito</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Loop_Extracurriculares_filtradas_por_fecha_y_hora</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <description>Creacion de la nueva inscripcion del estudiante</description>
+        <name>Creacion_Inscripcion_Nueva</name>
+        <label>Creacion Inscripcion Nueva</label>
+        <locationX>138</locationX>
+        <locationY>2906</locationY>
+        <connector>
+            <targetReference>Loop_Creacion_Inscripciones</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Estudiante__c</field>
+            <value>
+                <elementReference>InscripcionNueva.Estudiante__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Extracurricular__c</field>
+            <value>
+                <elementReference>InscripcionNueva.Extracurricular__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Inscripcion__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <description>Se obtienen todos los records de las actividades/eventos extracurriculares existentes</description>
+        <name>Get_Extracurriculares</name>
+        <label>Get Extracurriculares</label>
+        <locationX>182</locationX>
+        <locationY>650</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Extracurriculares_Totales</targetReference>
+        </connector>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Extracurricular__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Se obtienen las inscripciones a los eventos/actividades con las que ya cuenta el estudiante actualmente</description>
+        <name>Get_Inscripciones_Estudiante</name>
+        <label>Get Inscripciones Estudiante</label>
+        <locationX>182</locationX>
+        <locationY>134</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Conteo_Inscripciones_Iniciales</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Estudiante__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Inscripcion__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <screens>
+        <description>Pantalla de inscripción a las actividades/eventos extracurriculares</description>
+        <name>Inscribete_a_las_actividades_eventos_Extracurriculares</name>
+        <label>Inscribete a las actividades/eventos Extracurriculares!!</label>
+        <locationX>182</locationX>
+        <locationY>1958</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Assign_Extracurriculares_Seleccionadas</targetReference>
+        </connector>
+        <fields>
+            <name>ExtracurricularesFiltradasPorHora</name>
+            <dataTypeMappings>
+                <typeName>T</typeName>
+                <typeValue>Extracurricular__c</typeValue>
+            </dataTypeMappings>
+            <extensionName>flowruntime:datatable</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Data Table</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>selectionMode</name>
+                <value>
+                    <stringValue>MULTI_SELECT</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>minRowSelection</name>
+                <value>
+                    <numberValue>0.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>tableData</name>
+                <value>
+                    <elementReference>ExtracurricularesAMostrarVar</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>columns</name>
+                <value>
+                    <stringValue>[{&quot;apiName&quot;:&quot;Name&quot;,&quot;guid&quot;:&quot;column-6465&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;label&quot;:&quot;Extracurricular Name&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Lugar__c&quot;,&quot;guid&quot;:&quot;column-c6da&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;label&quot;:&quot;Lugar&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Descripcion__c&quot;,&quot;guid&quot;:&quot;column-c3a3&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;label&quot;:&quot;Descripcion&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Fecha_y_hora__c&quot;,&quot;guid&quot;:&quot;column-e3c5&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:3,&quot;label&quot;:&quot;Fecha y hora&quot;,&quot;type&quot;:&quot;customDateTime&quot;}]</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>SoloPaVer</name>
+            <fieldText>&lt;p&gt;{!FechaHoraAyerVar}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Inscripciones_Estudiante</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <description>Contador a utilizar a lo largo del flujo para diversos propósitos</description>
+        <name>Contador</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <name>currentItem_Filtrar_por_fecha_hora_extracurriculares</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Extracurricular__c</objectType>
+    </variables>
+    <variables>
+        <name>DuplicadosEliminar</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Extracurricular__c</objectType>
+    </variables>
+    <variables>
+        <description>Variable que contendrá las actividades/eventos extracurriculares a desplegarle al estudiante</description>
+        <name>ExtracurricularesAMostrarVar</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Extracurricular__c</objectType>
+    </variables>
+    <variables>
+        <description>Variable temporal que servirá para ir filtrando las actividades/eventos extracurriculares temporales a mostrar</description>
+        <name>ExtracurricularesMostrarTemp</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Extracurricular__c</objectType>
+    </variables>
+    <variables>
+        <description>Inscripciones seleccionadas por el estudiante a las actividades/eventos extracurriculares</description>
+        <name>ExtracurricularesSeleccionadasVar</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Extracurricular__c</objectType>
+    </variables>
+    <variables>
+        <description>Variable que contendrá las actividades/eventos extracurriculares totales</description>
+        <name>ExtracurricularesTotalesVar</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Extracurricular__c</objectType>
+    </variables>
+    <variables>
+        <description>Variable que contendrá las inscripciones con las que ya cuente el estudiante al inicio del flujo</description>
+        <name>InscripcionesEstudianteInicialVar</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Inscripcion__c</objectType>
+    </variables>
+    <variables>
+        <description>Variable que contendrá los records de las inscripciones iniciales con las que cuenta el estudiante</description>
+        <name>InscripcionesInicialesEstudianteVar</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Inscripcion__c</objectType>
+    </variables>
+    <variables>
+        <description>Variable que contiene la nueva inscripcion a crear para el estudiante</description>
+        <name>InscripcionNueva</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Inscripcion__c</objectType>
+    </variables>
+    <variables>
+        <description>Variable que sirve para eliminar las actividades/Eventos extracurriculares repetidas en la lista de extracurriculares final, almacena el id de la actividad/evento</description>
+        <name>previousExtracurricular</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Usuarios_Estudiantes</fullName>
+    <active>true</active>
+    <errorConditionFormula>$Profile.Name = &quot;Custom: Estudiante&quot;</errorConditionFormula>
+    <errorMessage>El usuario debe ser un estudiante solamente</errorMessage>
+</ValidationRule>
