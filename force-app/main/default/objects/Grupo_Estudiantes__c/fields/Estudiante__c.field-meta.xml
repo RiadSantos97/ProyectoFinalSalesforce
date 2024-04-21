@@ -4,15 +4,6 @@
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>Estudiante</label>
-    <lookupFilter>
-        <active>true</active>
-        <filterItems>
-            <field>User.ProfileId</field>
-            <operation>equals</operation>
-            <value>00eak000002tP1R</value>
-        </filterItems>
-        <isOptional>false</isOptional>
-    </lookupFilter>
     <referenceTo>User</referenceTo>
     <relationshipLabel>Grupos</relationshipLabel>
     <relationshipName>Grupos</relationshipName>

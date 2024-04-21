@@ -9,7 +9,7 @@
         <filterItems>
             <field>User.ProfileId</field>
             <operation>equals</operation>
-            <value>00eak000002tP1R</value>
+            <value>00eaj000003KUUr</value>
         </filterItems>
         <isOptional>false</isOptional>
     </lookupFilter>
