@@ -5,7 +5,7 @@
     <externalId>false</externalId>
     <label>Solicitudes Baja</label>
     <referenceTo>Grupo_Estudiantes__c</referenceTo>
-    <relationshipLabel>Cases</relationshipLabel>
+    <relationshipLabel>Caso</relationshipLabel>
     <relationshipName>Cases</relationshipName>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
